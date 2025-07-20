@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Healthcare: Transforming Diagnosis & Prevention</title>
+    <meta name="author" content="Peter Macharia">
+    <meta name="email" content="mpeter778@gmail.com">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particle-network"></div>
+    <div class="book-container">
+        <!-- Page 1: Landing -->
+        <div class="page page-1 active" id="page1">
+            <div class="hero-section">
+                <div class="hero-left">
+                    <div class="visual-container">
+                        <div class="microscope-view">
+                            <div class="cell-animation"></div>
+                        </div>
+                        <div class="neural-network"></div>
+                    </div>
+                    <h2>Beyond the Microscope</h2>
+                    <p>AI-powered breast cancer diagnostics</p>
+                </div>
+                <div class="hero-center">
+                    <h1 class="main-title">
+                        <span class="title-line">ADVANCING</span>
+                        <span class="title-line gradient-text">HEALTHCARE</span>
+                        <span class="title-line">THROUGH AI</span>
+                    </h1>
+                    <p class="subtitle">Two revolutionary approaches to saving lives</p>
+                    <button class="cta-button" onclick="flipPage(2)">
+                        <span>Begin Journey</span>
+                        <div class="button-glow"></div>
+                    </button>
+                </div>
+                <div class="hero-right">
+                    <div class="visual-container">
+                        <div class="hospital-door">
+                            <div class="door-animation"></div>
+                        </div>
+                        <div class="data-streams"></div>
+                    </div>
+                    <h2>The Revolving Door</h2>
+                    <p>Predicting hospital readmissions</p>
+                </div>
+            </div>
+            <div class="page-indicator">1 / 3</div>
+        </div>
+
+        <!-- Page 2: Breast Cancer Article -->
+        <div class="page page-2" id="page2">
+            <header class="article-header">
+                <div class="header-bg-animation"></div>
+                <h1>Beyond the Microscope: How AI is Revolutionizing Cancer Diagnostics.</h1>
+                <div class="author-info">
+                    <span class="author">By Peter Macharia || AI Specialist.</span>
+                    <span class="reading-time">8 min read</span>
+                </div>
+            </header>
+            <article class="article-content">
+                <div class="article-body">
+                    
+                    <p class="lead">As an AI engineer deeply embedded in the world of healthcare, I've seen firsthand the immense pressure our clinical colleagues face. Pathologists, the arbiters of diagnosis for diseases like cancer, are tasked with making life-altering decisions based on what they see through a microscope. It's a process that requires immense skill and experience, but it's also demanding, time-consuming, and, like any human endeavor, subject to variability.</p>
+                    <br></br>
+                    <div class="ethics-card">
+                    <p>What if we could provide these experts with a powerful new tool? A digital assistant, trained on thousands of examples, that could analyze biopsy images with superhuman speed and consistency, flagging areas of concern and helping to prioritize cases. This isn't science fiction; it's the mission behind my latest project in breast cancer diagnostics.</p>
+                    </div>
+                    <br></br>
+                    <h2>The Mission: Building a Digital Partner for Pathologists.</h2>
+                    <br></br>
+                    <div class="ethics-card">
+                    <p>My primary goal is to develop a deep learning model capable of classifying histopathological breast cancer biopsy images as either benign or malignant. 
+                    The objective isn't to replace the pathologist, but to augment their abilities. The system is designed to:</p>
+                    </div>
+                    <br></br>
+                    <ol>
+                        <li><strong>Automate First-Pass Analysis:</strong> Provide a rapid, high-accuracy classification of tumor images.</li>
+                        <br></br>
+                        <li><strong>Accelerate Review:</strong> Assist pathologists by highlighting potentially malignant cases, allowing them to focus their expertise where it's needed most.</li>
+                        <br></br>
+                        <li><strong>Democratize Expertise:</strong> Enable more consistent and rapid diagnosis, especially in resource-limited settings where access to specialized pathologists may be scarce.</li>
+                    </ol>
+                    <br></br>
+                    <h2>The Blueprint: From Raw Data to a Thinking Model.</h2>
+                    <br></br>
+                    <p>Building a trustworthy AI in healthcare starts with the data. For this project, I'm using the <strong>BreakHis dataset</strong>, a public collection of over 9,000 biopsy images. But using this data isn't as simple as just feeding it into a model.</p>
+                    <br></br>
+                    <div class="ethics-card">
+                        <p>A critical, and often overlooked, challenge is <strong>patient-level data leakage</strong>. In medical datasets, you often have multiple images from a single patient. If you're not careful, you can accidentally train your model on images from one patient and test it on other images from the <em>same</em> patient. When this happens, the model doesn't learn to identify cancer; it learns to identify <em>the patient</em>. It memorizes patient-specific artifacts instead of generalizable biological patterns. 
+                            This leads to a model that looks great on paper but fails completely in the real world.</p>
+                    </div>
+                    <br></br>
+                    <p>To build a robust and ethical model, my entire workflow is built around a <strong>patient-wise splitting</strong> strategy. All images from a single patient are strictly confined to one group: training, validation, or testing. This ensures the model is forced to learn the actual features of benign and malignant cells.</p>
+                    <br></br>
+                        <div class="ethics-card">
+                            <p>The model itself is a <strong>Convolutional Neural Network (CNN)</strong>, a type of AI architecture that excels at understanding visual information. Instead of building one from scratch, I'm using a technique called <strong>transfer learning</strong>. 
+                                I start with a model like <strong>ResNet50</strong>, which has already been trained by Google on millions of general images. This gives the model a foundational understanding of shapes, textures, and patterns. I then fine-tune this model on our specific biopsy images, 
+                                teaching it to apply its visual understanding to the nuanced task of identifying cancer cells.</p>
+                        </div>
+                    <br></br>
+                    <h2>Measuring What Truly Matters.</h2>
+                    <br></br>
+                    <p>In medical diagnostics, not all errors are created equal. A "false positive" (incorrectly flagging a benign sample as malignant) can cause patient anxiety and lead to unnecessary follow-up procedures. But a "false negative" (missing a cancer case) can be catastrophic.</p>
+                    <br></br>
+                    <p>This is why I've chosen the <strong>F1-Score</strong> as my primary performance metric. It mathematically balances the risks of both false positives (precision) and false negatives (recall), forcing the model to be both accurate and cautious.</p>
+                    <br></br>
+                    <h2>The Road Ahead: From Lab to Clinic.</h2>
+                    <br></br>
+                    <p>Developing a working model is only half the battle. Deploying it in a clinical setting presents its own set of challenges. One is <strong>concept drift</strong>, the idea that the characteristics of images might change over time as hospitals adopt new imaging equipment or tissue staining techniques. A deployed model must be continuously monitored and re-validated on new data to ensure it remains accurate.</p>
+                    <br></br>
+                    <p>The journey of AI in diagnostics is just beginning. By building these systems with a deep respect for clinical needs, data integrity, and ethical principles, we can create tools that empower our medical professionals and ultimately lead to better patient outcomes for all.</p>
+                </div>
+                <div class="metrics-sidebar">
+                    <div class="metric-card">
+                        <h3>95%</h3>
+                        <p>Detection Accuracy</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>&lt;2%</h3>
+                        <p>False Positives</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>9000+</h3>
+                        <p>Images Analyzed</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>F1</h3>
+                        <p>Primary Metric</p>
+                    </div>
+                </div>
+            </article>
+            <div class="page-navigation">
+                <button class="nav-button prev" onclick="flipPage(1)">← Back</button>
+                <div class="progress-indicator">
+                    <div class="progress-bar"></div>
+                </div>
+                <button class="nav-button next" onclick="flipPage(3)">Next Article →</button>
+            </div>
+            <div class="page-indicator">2 / 3</div>
+        </div>
+
+        <!-- Page 3: Hospital Readmission Article -->
+        <div class="page page-3" id="page3">
+            <header class="article-header">
+                <div class="header-bg-animation"></div>
+                <h1>The Revolving Door: How AI Can Predict and Prevent Hospital Readmissions</h1>
+                <div class="author-info">
+                    <span class="author">By Peter Macharia || AI Specialist</span>
+                    <span class="reading-time">7 min read</span>
+                </div>
+            </header>
+            <article class="article-content">
+                <div class="dashboard-preview">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="30">0</div>
+                        <div class="stat-label">Day Prediction Window</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="20">0</div>
+                        <div class="stat-label">% Reduction Target</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="3">0</div>
+                        <div class="stat-label">Data Sources Integrated</div>
+                    </div>
+                </div>
+                <div class="article-body">
+                    <p class="lead">In the world of healthcare, one of the most persistent and costly challenges is the "revolving door" of hospital readmissions. A patient is treated, discharged, and then, within weeks, they are back in the hospital for the same condition. It's a frustrating experience for patients, a sign of system-level gaps for clinicians, and a massive financial drain on healthcare systems worldwide.</p>
+                    <p>For years, we've tried to solve this with checklists and manual risk assessments. But what if we could look deeper? What if we could analyze the thousands of data points in a patient's record to predict their risk of readmission <em>before</em> they even leave the hospital? As a medical AI specialist, this is the problem I'm tackling with my hospital readmission prediction project.</p>
+                    <br></br>
+                    <br></br>
+                    
+                    <p>The goal is to build an AI system that can accurately identify patients at high risk of being readmitted within 30 days of discharge. This isn't about creating a crystal ball; it's about creating an early warning system that allows hospitals to be proactive. By identifying high-risk individuals, we can:</p>
+                    <br></br>
+                    <ol>
+                        <li><strong>Target Interventions:</strong> Allocate post-discharge resources like follow-up calls, home visits, and patient education to those who need them most.</li>
+                        <br></br>
+                        <li><strong>Reduce Readmission Rates:</strong> My aim is to reduce 30-day readmissions by 15-20%, a significant improvement for both patient well-being and hospital finances.</li>
+                        <br></br>
+                        <li><strong>Improve Patient Outcomes:</strong> Ultimately, this is about ensuring patients have a smoother, safer recovery journey after they leave the hospital.</li>
+                    </ol>
+                    <br></br>
+                    <h2>The Blueprint: Weaving a Data Narrative.</h2>
+                    <br></br>
+                    <p>A patient's story is written in data, but it's often scattered across a dozen different systems. The first, and most difficult, challenge is to bring that story together. My approach involves integrating data from three key sources:</p>
+                    <br></br>
+                    <ul>
+                        <li><strong>Electronic Health Records (EHRs):</strong> The core clinical data—diagnoses, lab results, medications, and length of stay.</li>
+                        <br></br>
+                        <li><strong>Demographics & Social Determinants:</strong> Factors like age, socioeconomic status, and living situation, which are often powerful predictors of health outcomes.</li>
+                        <br></br>
+                        <li><strong>Historical Data:</strong> A patient's past interactions with the healthcare system, such as prior admissions or emergency room visits.</li>
+                    </ul>
+                    <br></br>
+                    <p>This data integration is a monumental task, but it's the foundation of any successful healthcare AI. The entire process, from raw data to a final prediction, can be visualized as a pipeline.</p>
+                    <br></br>
+                    <p>One of the most nuanced steps is <strong>feature engineering</strong>. This is where domain expertise becomes critical. We don't just feed the raw data to the model; we transform it into clinically meaningful predictors. For example, instead of just listing a patient's diagnoses, we can calculate their <strong>Charlson Comorbidity Index</strong>, a well-established score that predicts long-term mortality risk. This single, powerful feature gives the model a much richer understanding of the patient's overall health.</p>
+                    <br></br>
+                    <h2>The Right Tool for the Job: Why I Chose XGBoost.</h2>
+                    <br></br>
+                    <p>For this type of structured, tabular data, my model of choice is <strong>XGBoost (Extreme Gradient Boosting)</strong>. Unlike a deep learning model designed for images, XGBoost is a powerhouse for this kind of problem. It's highly effective at handling a mix of different data types (numerical, categorical), it can capture complex, non-linear relationships, and it even has a built-in mechanism to rank which features were most important in making a prediction.</p>
+                    <br></br>
+                    <h2>The Ethical Tightrope: Accuracy vs. Fairness.</h2>
+                    <br></br>
+                    <p>In healthcare AI, we must walk a fine line. An accurate model is useless if it's not also fair. What if our data reflects historical biases? For example, if certain demographic groups have historically had less access to care, they might have fewer recorded hospital visits. A naive model might interpret this as them being "healthier" and assign them a lower risk score, perpetuating a cycle of inequity.</p>
+                    <br></br>
+                    <p>To address this, my approach is built on a foundation of <strong>algorithmic fairness</strong>:</p>
+                    <br></br>
+                    <ul>
+                        <li><strong>Bias Auditing:</strong> I will rigorously test the model's performance across different demographic subgroups to ensure it works well for everyone.</li>
+                        <br></br>
+                        <li><strong>Fairness-Aware Techniques:</strong> I will use methods like re-sampling the data to ensure minority groups are well-represented and, if necessary, use different prediction thresholds for different groups to ensure equitable outcomes.</li>
+                    </ul>
+                    <p>Furthermore, there's the trade-off between a model's accuracy and its <strong>interpretability</strong>. A "black box" model that is 95% accurate might be less useful in a clinical setting than a model that is 90% accurate but can explain <em>why</em> it made a particular prediction. This is why I plan to use <strong>SHAP (SHapley Additive exPlanations)</strong> alongside XGBoost. SHAP allows us to peer inside the model and see exactly which factors contributed to a patient's risk score, giving clinicians the transparency they need to trust and act on the AI's recommendations.</p>
+                    <br></br>
+                    <p>By combining advanced machine learning with a steadfast commitment to ethical principles and clinical utility, we can begin to close the gaps in our healthcare system. We can stop the revolving door and help patients move forward to a healthier future.</p>
+                    
+                </div>
+                <br></br>
+                <div class="ethics-panel">
+                    <h3>Ethical Considerations</h3>
+                    <div class="ethics-grid">
+                        <div class="ethics-card">
+                            <h4>Fairness</h4>
+                            <p>Ensuring equitable predictions across all demographics</p>
+                        </div>
+                        <div class="ethics-card">
+                            <h4>Transparency</h4>
+                            <p>Making AI decisions interpretable for clinicians</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div class="page-navigation">
+                <button class="nav-button prev" onclick="flipPage(2)">← Previous</button>
+                <button class="nav-button prev">Share This Research</button>
+            </div>
+            <div class="page-indicator">3 / 3</div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

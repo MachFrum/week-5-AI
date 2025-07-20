@@ -1,0 +1,613 @@
+:root {
+    /* Color Variables */
+    --bg-primary: #0A0E1A;
+    --bg-secondary: #141B2D;
+    --bg-tertiary: #1C2333;
+    --accent-pink: #E91E63;
+    --accent-teal: #00BCD4;
+    --accent-purple: #7C4DFF;
+    --accent-green: #4CAF50;
+    --text-primary: #E8EAF0;
+    --text-secondary: #B8BCC8;
+    --text-accent: #64B5F6;
+    --gradient-1: linear-gradient(135deg, #E91E63 0%, #7C4DFF 100%);
+    --gradient-2: linear-gradient(135deg, #00BCD4 0%, #4CAF50 100%);
+    --glass: rgba(255, 255, 255, 0.05);
+    --shadow-glow: 0 0 40px rgba(124, 77, 255, 0.3);
+    
+    /* Typography */
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Particle Network Background */
+.particle-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* Book Container */
+.book-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    perspective: 2000px;
+}
+
+/* Page Styles */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
+}
+
+.page.active {
+    display: block;
+    transform: rotateY(0deg);
+}
+
+.page.flipping-out {
+    display: block;
+    transform: rotateY(-180deg);
+}
+
+.page.flipping-in {
+    display: block;
+    transform: rotateY(0deg);
+}
+
+/* Page 1: Landing Styles */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    padding: 0 5%;
+    position: relative;
+}
+
+.hero-left, .hero-right {
+    flex: 1;
+    text-align: center;
+}
+
+.hero-center {
+    flex: 1.5;
+    text-align: center;
+    z-index: 10;
+}
+
+.visual-container {
+    position: relative;
+    height: 300px;
+    margin-bottom: 2rem;
+}
+
+.microscope-view, .hospital-door {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: var(--glass);
+    border: 2px solid var(--accent-purple);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-glow);
+}
+
+.cell-animation, .door-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--accent-pink) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.main-title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.title-line {
+    display: block;
+    letter-spacing: 0.05em;
+}
+
+.gradient-text {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.cta-button {
+    position: relative;
+    padding: 1.25rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background: var(--gradient-1);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+}
+
+.button-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Make article content scrollable instead of the whole page */
+.page-2 .article-content,
+.page-3 .article-content {
+    height: calc(100vh - 200px); /* Subtract header height */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+}
+
+/* Keep header fixed at top */
+.page-2 .article-header,
+.page-3 .article-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
+/* Article Pages Common Styles */
+.article-header {
+    position: relative;
+    padding: 4rem 5%;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    overflow: hidden;
+}
+
+.header-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background: url('data:image/svg+xml,<svg>...</svg>');
+}
+
+.article-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    max-width: 800px;
+}
+
+.author-info {
+    display: flex;
+    gap: 2rem;
+    color: var(--text-secondary);
+}
+
+.article-content {
+    padding: 2rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.article-body {
+    padding: 0 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    height: auto;
+    overflow: visible;
+}
+
+.lead {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+/* Metrics Sidebar */
+.metrics-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.metric-card {
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(124, 77, 255, 0.3);
+}
+
+.metric-card h3 {
+    font-size: 2.5rem;
+    color: var(--accent-purple);
+    margin-bottom: 0.5rem;
+}
+
+/* Image sections */
+.image-section {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.article-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1rem;
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+/* Diagram Container */
+.diagram-container {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 16px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.diagram-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.diagram-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* If you want the container to span full width in a grid */
+.article-body .diagram-container {
+    margin-left: -3rem;
+    margin-right: -3rem;
+    max-width: calc(100% + 6rem);
+}
+
+/* Responsive handling */
+@media (max-width: 768px) {
+    .diagram-container {
+        margin: 2rem -1rem;
+        padding: 1rem;
+        border-radius: 0;
+    }
+    
+    .article-body .diagram-container {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        max-width: calc(100% + 2rem);
+    }
+}
+/* Ensure sidebar displays correctly */
+.article-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    align-items: start;
+}
+
+@media (max-width: 968px) {
+    .article-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+}
+
+/* Dashboard Preview */
+.dashboard-preview {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: var(--glass);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    min-width: 150px;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-teal);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Ethics Panel */
+.ethics-panel {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.ethics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.ethics-card {
+    background: var(--glass);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Navigation */
+.page-navigation {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-purple);
+    border-radius: 25px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background: var(--accent-purple);
+    transform: translateY(-2px);
+}
+
+.progress-indicator {
+    width: 150px;
+    height: 4px;
+    background: var(--bg-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-1);
+    transition: width 0.5s ease;
+}
+
+.page-indicator {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 2rem;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .article-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .metrics-sidebar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        position: static;
+    }
+}
+/* Give each page its own subtle theme */
+.page-1 {
+    background: var(--bg-primary);
+    background-image: var(--gradient-mesh);
+}
+
+.page-2 {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, #0F1319 100%);
+    position: relative;
+}
+
+/* Add subtle background pattern to page 2 */
+.page-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.02;
+    background-image: 
+        radial-gradient(circle at 20% 80%, var(--accent-pink) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--accent-purple) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.page-3 {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, #0A1014 100%);
+}
+
+.page-3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.02;
+    background-image: 
+        radial-gradient(circle at 30% 70%, var(--accent-teal) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, var(--accent-green) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Ensure smooth scrolling within article pages */
+.page-2, .page-3 {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* For iOS */
+}
+
+/* Custom scrollbar for article pages */
+.page-2::-webkit-scrollbar,
+.page-3::-webkit-scrollbar {
+    width: 8px;
+}
+
+.page-2::-webkit-scrollbar-track,
+.page-3::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.page-2::-webkit-scrollbar-thumb {
+    background: var(--accent-purple);
+    border-radius: 4px;
+}
+
+.page-3::-webkit-scrollbar-thumb {
+    background: var(--accent-teal);
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .page-2 .article-content,
+    .page-3 .article-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-2 .metrics-sidebar,
+    .page-3 .metrics-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+}
+/* Fix for Page 3 - single column layout */
+.page-3 .article-content {
+    display: block; /* Override grid */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 5%;
+}
+
+/* Ensure article-body takes full width on page 3 */
+.page-3 .article-body {
+    display: block; /* Override grid */
+    max-width: 800px; /* Comfortable reading width */
+    margin: 0 auto;
+}
+
+/* Dashboard preview should be full width */
+.page-3 .dashboard-preview {
+    max-width: 100%;
+    margin: 0 auto 3rem;
+}
+
+/* Ethics panel styling */
+.page-3 .ethics-panel {
+    max-width: 800px;
+    margin: 3rem auto;
+}
