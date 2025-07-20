@@ -4,6 +4,10 @@
 
 As an AI engineer and a medical laboratory scientist with a deep focus on medical applications, this repository outlines the comprehensive workflow and strategic thinking behind two critical healthcare AI projects. My goal is to demonstrate an end-to-end approach—from initial problem definition and rigorous data handling to model deployment and ethical considerations.
 
+## 🔗 Live Demo
+
+Have a read here : [here](https://machfrum.github.io/week-5-AI/).
+
 ## 🔬 Part 1: Breast Cancer Biopsy Image Classification
 
 This project focuses on developing a high-accuracy, automated system to aid pathologists in diagnosing breast cancer from histopathological images.
